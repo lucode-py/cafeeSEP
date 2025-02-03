@@ -11,10 +11,161 @@
     <div class="container">
         <h1 class="mt-5">Panneau de modification</h1>
         <p>Bienvenue dans l'interface d'édition du site.</p>
+
+         <!-- Parcours des textes -->
+         {% for texte in textes %}
+         {% if texte.section == "À propos de nous" %}
+             <div class="card mb-4">
+                 <div class="card-body">
+                     <!-- Affichage des champs avec possibilité de modifier -->
+                     <form method="post" enctype="multipart/form-data" action="{% url 'update_texte' texte.id %}">
+                         {% csrf_token %}
+                         <div>
+                             <!-- Zone de texte éditable -->
+                             <h2 class="fw-semibold">À propos de nous</h2>
+                             <textarea name="contenu" class="form-control">{{ texte.contenu }}</textarea>
+                         </div>
+                         <!-- Bouton de soumission -->
+                         <button type="submit" class="btn btn-primary mt-3">Sauvegarder</button>
+                     </form>
+                 </div>
+             </div>
+         {% endif %}
+     {% endfor %}            
+        </div>
+        <div class="container">
+            <h2 class="fw-semibold">Modifier les activités</h2>
+            <div class="d-flex">
+                
+                {% if activites %}
+                    {% for activite in activites %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data" action="{% url 'update_activite' activite.id %}">
+                                {% csrf_token %}
+                    
+                                <!-- Modification du titre -->
+                                <div>
+                                    <label for="titre-{{ activite.id }}">Titre</label>
+                                    <input type="text" id="titre-{{ activite.id }}" name="titre" value="{{ activite.titre }}" class="form-control">
+                                </div>
+                    
+                                <!-- Modification de la description -->
+                                <div>
+                                    <label for="description-{{ activite.id }}">Description</label>
+                                    <textarea id="description-{{ activite.id }}" name="description" class="form-control">{{ activite.description }}</textarea>
+                                </div>
+                    
+                                <!-- Modification de la date -->
+                                <div>
+                                    <label for="date-{{ activite.id }}">Date</label>
+                                    <input type="date" id="date-{{ activite.id }}" name="date" value="{{ activite.date|date:'Y-m-d' }}" class="form-control">
+                                </div>
+                    
+                                <!-- Modification de l'image -->
+                                <div>
+                                    {% if activite.image %}
+                                        <img src="{{ activite.image.url }}" alt="{{ activite.titre }}" class="img-fluid mb-2" style="max-width: 300px;">
+                                    {% endif %}
+                                    <input type="file" name="image" class="form-control mb-2">
+                                </div>
+                    
+                                <!-- Bouton de sauvegarde -->
+                                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                                <a href="{% url 'delete_activite' activite.id %}" class="btn btn-danger">Supprimer</a>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    {% endfor %}
+                {% else %}
+                    <p>Aucune activité trouvée.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">        
+            <!-- Formulaire pour ajouter une nouvelle activité -->
+            <h2 class="fw-semibold">Ajouter une nouvelle activité</h2>
+            <form method="post" enctype="multipart/form-data" action="{% url 'add_activite' %}">
+                {% csrf_token %}
+                <label>Titre :</label>
+                <input type="text" name="titre" class="form-control mb-2" required>
+        
+                <label>Description :</label>
+                <textarea name="description" class="form-control mb-2" required></textarea>
+
+                <label>Date :</label>
+                <input type="date" name="date" class="form-control mb-2" required></input>
+        
+                <label>Image :</label>
+                <input type="file" name="image" class="form-control mb-2">
+        
+                <button type="submit" class="btn btn-success">Ajouter</button>
+            </form>
+        </div>
+
+        </div>
+         <!-- Bloc pour la section "Rendez-vous" -->
+         <div class="container mb-4 mt-5">
+            <div class="card-body">
+                <h2 class="fw-semibold">Modifier les Rendez-vous</h2>
+                
+                <form method="post" enctype="multipart/form-data" action="{% url 'update_rendezvous' %}">
+                    {% csrf_token %}
+                    
+                    <!-- Liste des dates existantes -->
+                    <div id="dates-container">
+                        {% for texte in textes %}
+                            {% if texte.section == "Rendez-vous" %}
+                                <div class="d-flex align-items-center mb-3">
+                                    <input type="text" name="dates[]" value="{{ texte.contenu }}" class="form-control me-2">
+                                    <button type="button" class="btn btn-danger btn-sm remove-date">Supprimer</button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Bouton pour ajouter une nouvelle date -->
+                    <button type="button" class="btn btn-secondary mb-3" id="add-date">Ajouter une date</button>
+                    
+                    <!-- Bouton pour sauvegarder les modifications -->
+                    <button type="submit" class="btn btn-primary mb-3">Sauvegarder</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
         <form id="logout-form" action="{% url 'logout' %}" method="post">
             {% csrf_token %}
-            <button type="submit">Déconnexion</button>
+            <button type="submit" class="btn btn-danger m-5 ">Déconnexion</button>
         </form>
+
     </div>
+
+        <!-- Script pour gérer l'ajout et la suppression de dates -->
+        <script>
+            document.getElementById('add-date').addEventListener('click', function() {
+                const container = document.getElementById('dates-container');
+                const newDateField = document.createElement('div');
+                newDateField.classList.add('d-flex', 'align-items-center', 'mb-3');
+                newDateField.innerHTML = `
+                    <input type="text" name="dates[]" value="" class="form-control me-2">
+                    <button type="button" class="btn btn-danger btn-sm remove-date">Supprimer</button>
+                `;
+                container.appendChild(newDateField);
+                setupRemoveButtons();
+            });
+    
+            function setupRemoveButtons() {
+                document.querySelectorAll('.remove-date').forEach(button => {
+                    button.addEventListener('click', function() {
+                        this.parentElement.remove();
+                    });
+                });
+            }
+    
+            setupRemoveButtons();
+        </script>
 </body>
 </html>

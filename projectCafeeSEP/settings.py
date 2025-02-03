@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,11 @@ SECRET_KEY = 'django-insecure-8bw-55^($l$jlq^0a-qu1!wme2lt9%4)t$momd&-n2p&_#m=*_
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+# Répertoire où Django cherchera les fichiers statiques
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'main', 'static'),  # Ajoute ici le chemin vers ton dossier static
+]
 
 
 LOGIN_REDIRECT_URL = '/edit'  # Rediriger vers /edit après connexion
@@ -126,3 +132,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

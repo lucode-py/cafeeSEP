@@ -7,7 +7,7 @@
     <!-- Inclure Bootstrap depuis un CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
+    {% load static %}
     <style>
          /* Autoriser le scroll uniquement vertical */
         body, html {
@@ -70,22 +70,20 @@
     </div>
 
     <div class="container rounded mb-5 shadow-lg">
-        <h2 class="fw-semibold p-3">Objectif</h2>
-        <p class="fs-5 p-4">
-            Nous nous réunissons un jeudi par mois autour d’un petit goûter.<br/>
-            A chaque réunion nous prenons plaisir à échanger sur ce qui nous a occupé le mois précédent (lecture, film, sorties diverses, pâtisseries…) et à échanger tous types d’infos et conseils selon nos compétences (aides administratives, des tuyaux sur l’utilisation d’application sur smartphone, des recettes pour réaliser des gâteaux…).<br/>
-            Nous partageons nos lectures concernant les nouveautés de la prise en charge de la SEP comme les nouvelles recherches, traitements de fonds,...<br/>
-            Nous nous réunissons dans le but de nous échapper du quotidien.<br/>
-            Nous avons constitué un cercle d’amis presque une petite famille et nous échangeons entre deux réunions via notre groupe Whatsapp.
-        </p>
+        <h2 class="fw-semibold p-3">À propos de nous</h2>
+        {% for texte in textes %}
+            {% if texte.section == "À propos de nous" %}
+                <p class="fs-5 p-4"> {{ texte.contenu }}</p>
+            {% endif %}
+        {% endfor %}
     </div>
 
    <div class="container mt-5">
-       <h2 class="p-3">Activiter</h2>
+       <h2 class="p-3 fw-semibold">Activité</h2>
         <div id="carouselExampleCaptions" class="carousel slide mx-auto" style="max-width: 800px;">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="asset/afficheCinéma1.png" class="d-block w-100" alt="Sortie au cinéma">
+                    <img src="{% static 'home_images/afficheCinéma1.png' %}" class="d-block w-100" alt="Sortie au cinéma">
                     <!-- Superposition du dégradé sombre -->
                     <div class="carousel-caption-overlay"></div>
                     <div class="carousel-caption">
@@ -95,7 +93,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="asset/afficheRestaurant.png" class="d-block w-100" alt="Sortie au restaurant">
+                    <img src="{% static 'home_images/afficheRestaurant.png' %}" class="d-block w-100" alt="Sortie au restaurant">
                     <!-- Superposition du dégradé sombre -->
                     <div class="carousel-caption-overlay"></div>
                     <div class="carousel-caption">
@@ -120,20 +118,32 @@
     <!-- Autre contenu de la page -->
     <div class="container rounded mb-4 mt-5 shadow-lg bg-green-800 text-white">
       <div class="row">
-        <div class="col-sm-6 p-5">
+        <div class="col-sm-6 p-5 fs-5127.0.0.1;8000">
           <div class="content-text">
-            <h2>Rendez-vous</h2>
+            <h2 class="fw-semibold">Rendez-vous</h2>
             <ul class="p-3">
-              <li class="mt-2">19 septembre 2024</li>
-              <li class="mt-2">10 octobre 2024</li>
-              <li class="mt-2">14 novembre 2024</li>
-              <li class="mt-2">19 décembre 2024</li>
+                {% for texte in textes %}
+                    {% if texte.section == "Rendez-vous" %}
+                        <!--<li class="mt-2">19 septembre 2024</bonjour M.
+
+je vous remet le document complèté avec les info demander ...
+dites moi si il y a encore des chose a modifier
+
+Merci d'avence
+Lucas DUGARD
+li>
+                        <li class="mt-2">10 octobre 2024</li>
+                        <li class="mt-2">14 novembre 2024</li>
+                        <li class="mt-2">19 décembre 2024</li>-->
+                        <li class="mt-2">{{ texte.contenu }}</li>
+                    {% endif %}
+                {% endfor %}
             </ul>
           </div>
         </div>
 
         <div class="col-sm-6 d-flex justify-content-center align-items-center">
-          <img src="asset/agenda.png" class="rounded img-fluid mb-4" alt="" width="500">
+          <img src="{% static 'home_images/agenda.png' %}" alt="Agenda" class="rounded img-fluid mb-4" width="500">
         </div>
       </div>
     </div>
