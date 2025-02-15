@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    {% load static %}
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        .header-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .header-section svg {
+            position: absolute;
+            top: -16em;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .title-container {
+            position: relative;
+            z-index: 1;
+            top: -15em;
+        }
+        .bg-green-800 {
+            background-color: #4A7856;
+        }
+        .carousel-caption-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+        }
+        #scroll-container {
+            height: 100vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        .section {
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script type="module" src="http://localhost:5173/src/main.js"></script>
+</head>
+<body>
+    <div id="scroll-container">
+        <div class="header-section section">
+            <svg viewBox="0 0 1410 1557" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1037.33 1153.21C898.866 1282.34 537.996 1120.4 231.308 791.517C-75.3803 462.634 -211.75 91.3468 -73.283 -37.7757C65.1839 -166.898 426.053 -4.95995 732.741 323.923C1039.43 652.805 1175.8 1024.09 1037.33 1153.21Z" fill="#4A7856"/>
+            </svg>
+            <div class="content title-container text-center text-white">
+                <h1 class="fw-semibold">Café SEP</h1>
+            </div>
+        </div>
+
+        <div class="container rounded mb-5 shadow-lg section">
+            <h2 class="fw-semibold p-3">À propos de nous</h2>
+            {% for texte in textes %}
+                {% if texte.section == "À propos de nous" %}
+                    <p class="fs-5 p-4">{{ texte.contenu }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="container mt-5 section">
+            <h2 class="p-3 fw-semibold">Activité</h2>
+            <div id="carouselExampleCaptions" class="carousel slide mx-auto" style="max-width: 800px;">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'home_images/afficheCinéma1.png' %}" class="d-block w-100" alt="Sortie au cinéma">
+                        <div class="carousel-caption-overlay"></div>
+                        <div class="carousel-caption">
+                            <h5>Sortie au cinéma</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container rounded mb-4 mt-5 shadow-lg bg-green-800 text-white section">
+            <div class="row">
+                <div class="col-sm-6 p-5">
+                    <div class="content-text">
+                        <h2 class="fw-semibold">Rendez-vous</h2>
+                        <ul class="p-3">
+                            {% for texte in textes %}
+                                {% if texte.section == "Rendez-vous" %}
+                                    <li class="mt-2">{{ texte.contenu }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 d-flex justify-content-center align-items-center">
+                    <img src="{% static 'home_images/agenda.png' %}" alt="Agenda" class="rounded img-fluid mb-4" width="500">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

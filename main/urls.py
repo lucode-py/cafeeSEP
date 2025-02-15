@@ -11,4 +11,5 @@ urlpatterns = [
     path("update-activite/<int:activite_id>/", update_activite, name="update_activite"),
     path('add_activite/', add_activite, name='add_activite'),
     path('delete_activite/<int:activite_id>/', delete_activite, name='delete_activite'),
+    path("api/textes/", api_textes),
 ]

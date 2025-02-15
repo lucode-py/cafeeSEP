@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import TexteHomeForm 
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 
 @login_required
@@ -90,3 +91,7 @@ def delete_activite(request, activite_id):
     activite = get_object_or_404(Activite, id=activite_id)
     activite.delete()
     return redirect('edit')
+
+def api_textes(request):
+    textes = list(TexteHome.objects.values())  # Convertir en liste de dictionnaires
+    return JsonResponse(textes, safe=False)
