@@ -1,0 +1,43 @@
+.glassmorph-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(25000px); /* Flou arrière-plan */
+    -webkit-backdrop-filter: blur(25000px); /* Compatibilité Safari */
+    border-radius: 15px; /* Coins arrondis */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure transparente */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre légère */
+    color: white; /* Texte blanc */
+    margin: auto; /* Centre le composant */
+    text-align: left;
+    width: 90%; /* S'adapte aux petits écrans */
+    padding: 2rem; /* Évite que le contenu colle aux bords */
+
+  }
+ 
+  
+.rendezvous-container {
+display: flex;
+flex-direction: column-reverse;
+align-items: center;
+}
+
+@media (min-width: 768px) {
+.rendezvous-container {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.rendezvous-text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.rendezvous-img {
+    flex: 1;
+    text-align: right;
+}
+
+.rendezvous-img img {
+    max-width: 100%;
+    height: auto;
+}
+}

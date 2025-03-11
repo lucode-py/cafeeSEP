@@ -95,3 +95,17 @@ def delete_activite(request, activite_id):
 def api_textes(request):
     textes = list(TexteHome.objects.values())  # Convertir en liste de dictionnaires
     return JsonResponse(textes, safe=False)
+
+def api_activities(request):
+    activities = Activite.objects.all()
+    data = [
+        {
+            "id": activity.id,
+            "titre": activity.titre,
+            "description": activity.description,
+            "date": activity.date.strftime("%Y-%m-%d"),  # Format de date standard
+            "image": request.build_absolute_uri(activity.image.url) if activity.image else None,
+        }
+        for activity in activities
+    ]
+    return JsonResponse(data, safe=False)

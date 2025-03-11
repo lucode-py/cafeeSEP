@@ -2,6 +2,8 @@
 
 from django.urls import path
 from .views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home, name='home'),  # L'URL de la page d'accueil
@@ -12,4 +14,5 @@ urlpatterns = [
     path('add_activite/', add_activite, name='add_activite'),
     path('delete_activite/<int:activite_id>/', delete_activite, name='delete_activite'),
     path("api/textes/", api_textes),
-]
+    path("api/activites/", api_activities),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # ✅ Sert les fichiers médias en mode debug

@@ -1,0 +1,18 @@
+@media (min-width: 985px) {
+  .glassmorph-container-slide {
+    position: relative;
+    height: 70vh; /* Ajuste la hauteur du conteneur */
+    text-align: right;
+    overflow: hidden;
+  }
+
+  .glassmorph-container-slide img {
+    display: block;
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    right: 0; /* Aligne à droite */
+    transform: translateY(-50%); /* Centre verticalement */
+    object-fit: contain;
+  }
+}

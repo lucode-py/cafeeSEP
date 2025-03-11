@@ -19,6 +19,7 @@ class Activite(models.Model):
     description = models.TextField()  # Description de l'activité
     date = models.DateField(null=True, blank=True)  # Date de l'activité (facultatif)
     image = models.ImageField(upload_to='activites_images/', null=True, blank=True)  # Image associée (facultatif)
+    
 
     def __str__(self):
         return self.titre

@@ -1,69 +1,121 @@
 html, body {
   height: 100%;
-  background: #040705;
-  scroll-behavior: smooth;
+  margin: 0;
+  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
+  transition: background 0.8s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  background: #4A7856;
+  text-align: left !important;
 }
 
-body { 
-  font-size: 18px;
-  font-weight: 500;
+.slides-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ajustement ici */
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
 
 .panel {
-  position: fixed;
-  width: 100vw;
+  scroll-snap-align: start;
+  flex: 0 0 100vh; /* Correction ici */
+  width: 100%;
   height: 100vh;
-  top: 0;
-  left: 0;
-  background: linear-gradient(107.15deg,#13331b 0,#30c052 100%);
-}
-
-.panel:nth-of-type(2n) {
-  background: linear-gradient(107.15deg,#30c052 0,#13331b 100%);
-}
-
-.panel .fixed-container {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  overflow: hidden; /* Empêche le débordement */
+  transition: background 1s ease-in-out; /* Transition plus fluide */
 }
 
-h1, p, a {
-  color: #fff !important;
+.fixed-container {
+  max-width: 90%; /* Pour éviter les débordements */
   text-align: left;
-  
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 
-.active {
-  color: red !important;
-}
+.glassmorph-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(25000px); /* Flou arrière-plan */
+  -webkit-backdrop-filter: blur(25000px); /* Compatibilité Safari */
+  border-radius: 15px; /* Coins arrondis */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure transparente */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre légère */
+  color: white; /* Texte blanc */
+  margin: auto; /* Centre le composant */
+  text-align: left;
+  width: 90%; /* S'adapte aux petits écrans */
+  max-width: 1200px; /* Largeur maximale */
+  padding: 2rem; /* Évite que le contenu colle aux bords */
 
-
-section:not(.intro) {
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(1.2);
 } 
 
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: auto;
-  width: fit-content;
-  display: flex;
-  grid-gap: 20px;
-  padding: 30px;
-  z-index: 999999;
+
+
+
+h1, h2, h3, h4, li, p, ol {
+  color: #fff;
 }
-@media (max-width: 768px) {
-  .panel {
-    height: 100vh;
-    min-height: 100vh;
-    overflow: hidden; /* Empêche les débordements */
+ 
+/* Ajustement du texte pour mobile */
+h1 {
+  font-size: 3vw;
+  margin-bottom: 1rem;
+}
+
+/* Ajustement du texte pour mobile */
+h2 {
+  font-size: 2.5vw;
+  margin-bottom: 1rem;
+}
+
+/* Ajustement du texte pour mobile */
+h3 {
+  font-size: 2vw;
+  margin-bottom: 1rem;
+}
+
+p, li {
+  font-size: 1.3vw;
+  line-height: 1.5;
+}
+
+/* Sur mobile, augmenter la taille du texte */
+@media (max-width: 980px) and (orientation: portrait) {
+  p, li {
+    font-size: 3.6vw; /* Taille plus grande sur mobile */
+  }
+
+  /* Ajustement du texte pour mobile */
+  h2 {
+    font-size: 4.6vw;
+  }
+
+  h3 {
+    font-size: 5.1vw;
+  }
+
+  h1 {
+    font-size: 5.6vw;
+  }
+}
+
+@media (max-width: 980px) and (orientation: landscape) {
+  p, li {
+    font-size: 1.5vw;
+  }
+}
+
+@media (max-width: 980px) {
+  .glassmorph-container img {
+    width: 100%; /* L’image prend toute la largeur */
+    height: auto;
+    max-height: 2000px;
+    object-fit: cover; /* Recadre l'image pour éviter les bandes blanches */
+    border-radius: 10px;
   }
 }
