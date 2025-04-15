@@ -21,7 +21,8 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "changeme")
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = str(os.getenv("DEBUG", "False")).strip().lower() in ["1", "true", "yes"]
+IS_DEV = DEBUG
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
@@ -61,9 +62,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'corsheaders',
+    "django_vite",
 ]
 
+
+print("DEBUG VITE", type(DEBUG))  # pour voir si DEBUG est bien bool
+
+
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": DEBUG,
+        "dev_server_port": 5173,
+        "dev_server_host": "localhost",
+        "static_url_prefix": "frontend"
+    }
+}
+
+
+"""print("DJANGO_VITE is", type(DJANGO_VITE), DJANGO_VITE)"""
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -95,6 +115,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'projectCafeeSEP.wsgi.application'
 CORS_ALLOW_ALL_ORIGINS = True  # Permet à React de se connecter à Django
 
+"""CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]"""
 
 
 # Password validation
@@ -132,6 +155,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Ajoutez cette ligne
+
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -140,3 +167,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+

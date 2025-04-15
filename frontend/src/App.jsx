@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Lenis from "@studio-freight/lenis"; // Importer Lenis
 import Header from "./components/Header";
 import About from "./components/About";
 import Carousel from "./components/Carousel";
 import RendezVous from "./components/RendezVous";
+import ReportsSidebar from "./components/ReportsSidebar";
 
 const useSmoothBackground = () => {
   const [background, setBackground] = useState("linear-gradient(107.15deg, #13331b, #30c052)");
@@ -33,8 +35,32 @@ const App = () => {
   const [textes, setTextes] = useState([]);
   const [activities, setActivities] = useState([]);
   const [scrollIndex, setScrollIndex] = useState(0);
-  const background = useSmoothBackground(); // 💡 Correctement utilisé ici
+  const background = useSmoothBackground(); // 💡 Correctement utilisé ici 
 
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.5, // Durée du scroll (plus c'est élevé, plus c'est doux)
+      easing: t => t * (2 - t), // équivalent à "easeOutQuad"
+      gestureOrientation: "vertical", // pour s'assurer qu'on scroll bien verticalement
+      wheelMultiplier: 0.3, // réduit la sensibilité au scroll avec la molette / trackpad
+      normalizeWheel: true,
+      smooth: true,
+      smoothTouch: false // smooth activé aussi pour le tactile
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy(); // clean-up
+    };
+
+  }, []);
+  
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/textes/")
       .then((res) => res.json())
@@ -50,27 +76,6 @@ const App = () => {
         setActivities(data);
       })
       .catch((error) => console.error("Erreur lors du chargement des activités :", error));
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll(".panel");
-      let index = 0;
-
-      sections.forEach((section, i) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-          index = i;
-        }
-      });
-
-      setScrollIndex(index);
-    };
-
-    document.querySelector(".slides-wrapper").addEventListener("scroll", handleScroll);
-    return () => {
-      document.querySelector(".slides-wrapper").removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
   return (
@@ -93,6 +98,11 @@ const App = () => {
       <section className="panel">
         <div className="fixed-container">
           <RendezVous textes={textes} />
+        </div>
+      </section>
+      <section className="panel">
+        <div className="fixed-container">
+          <ReportsSidebar />
         </div>
       </section>
     </div>

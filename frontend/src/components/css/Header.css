@@ -1,0 +1,53 @@
+.scroll-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 1.5s infinite;
+    cursor: pointer;
+    z-index: 5;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(10px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(5px);
+    }
+  }
+
+.header-section {
+  position: relative; /* Définit un contexte de positionnement pour les éléments enfants */
+  height: 100vh; /* Assurez-vous que la section occupe toute la hauteur de la fenêtre */
+}
+
+.title-container {
+  position: absolute; /* Position relative à la section parent */
+  top: 50%; /* Centre verticalement */
+  left: 50%; /* Centre horizontalement */
+  transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
+  text-align: center; /* Centre le texte */
+  z-index: 10; /* Assurez-vous que le titre est au-dessus des autres éléments */
+  
+  max-width: 800px; /* Limite la largeur maximale */
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  overflow: hidden; /* Cache le débordement si nécessaire */
+  text-overflow: ellipsis; /* Ajoute des points de suspension si le texte dépasse */
+}
+
+@media (max-width: 985px) {
+  .scroll-down {
+    bottom: 10px; /* Réduit la distance par rapport au bas */
+    width: 30px; /* Réduit la taille de la flèche */
+    height: 30px;
+  }
+
+  .title-container {
+    width: 90%; /* Réduit la largeur sur les petits écrans */
+    max-width: none; /* Supprime la limite de largeur maximale */
+  }
+}

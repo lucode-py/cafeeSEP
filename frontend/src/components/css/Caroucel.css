@@ -16,3 +16,30 @@
     object-fit: contain;
   }
 }
+
+/* Personnalisation des boutons de navigation */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white; /* Change la couleur des flèches */
+  background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
+  border-radius: 50%; /* Rendre les boutons ronds */
+  width: 50px; /* Taille personnalisée */
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Changement de style au survol */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Ajustement de l'icône des flèches */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px; /* Taille des icônes */
+  font-weight: bold;
+}

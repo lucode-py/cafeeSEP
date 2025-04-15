@@ -23,3 +23,13 @@ class Activite(models.Model):
 
     def __str__(self):
         return self.titre
+
+
+class Report(models.Model):
+    file = models.FileField(upload_to='report/')
+    date_added = models.DateField()
+
+    def __str__(self):
+        return self.file.name
+    
+

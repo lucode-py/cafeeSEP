@@ -1,6 +1,7 @@
 # main/views.py
 from .models import TexteHome
 from .models import Activite
+from .models import Report
 
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
@@ -8,14 +9,21 @@ from django.shortcuts import render, redirect
 from .forms import TexteHomeForm 
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+import os
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.http import HttpResponse
+import stat
+import urllib.parse
 
 
 @login_required
 def edit(request):
     textes = TexteHome.objects.all()
     activites = Activite.objects.all()
+    reports = Report.objects.all()
     print("Activités récupérées :", activites)  # ✅ Vérifie si Django récupère bien les activités
-    return render(request, 'edit.html', {'textes': textes, 'activites': activites})
+    return render(request, 'edit.html', {'textes': textes, 'activites': activites, 'reports': reports})
 
 
 def home(request):
@@ -73,6 +81,7 @@ def update_activite(request, activite_id):
         return redirect("edit")  # Redirection vers la page d'édition après sauvegarde
 
     return render(request, "edit.html", {"activite": activite})
+
 @csrf_exempt
 def add_activite(request):
     if request.method == "POST":
@@ -109,3 +118,54 @@ def api_activities(request):
         for activity in activities
     ]
     return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def upload_report(request):
+    if request.method == 'POST':
+        file = request.FILES['file']
+        date = request.POST['date_added']
+        report = Report(file=file, date_added=date)  # Associer le fichier au modèle
+        report.save()  # Sauvegarde du fichier et création de l'entrée en base
+        return redirect('edit')
+    return render(request, 'error.html', {'message': 'File not found'})
+
+@csrf_exempt
+def delete_report(request, file_name):
+    if request.method == 'POST':
+        file_name = urllib.parse.unquote(file_name)  # Décodage des caractères spéciaux
+        report = get_object_or_404(Report, file=file_name)
+        report.file.delete()
+        report.delete()
+        return redirect('edit')
+    return render(request, 'error.html', {'message': 'File not found'})
+
+@csrf_exempt
+def update_report(request, report_id):
+    report = get_object_or_404(Report, id=report_id)
+    
+
+    if request.method == 'POST':
+        if 'date_added' in request.POST:
+            report.date_added = request.POST['date_added']
+        
+        if 'file' in request.FILES:
+            report.file.delete()  # Supprime l'ancien fichier
+            report.file = request.FILES['file']  # Remplace par le nouveau
+
+        report.save()
+        return redirect('edit')
+
+    return render(request, 'error.html', {'message': 'Invalid request'})
+
+def list_reports(request):
+    reports = Report.objects.all().values('id', 'file', 'date_added')
+    data = [
+        {
+            'id': report['id'],
+            'name': os.path.basename(report['file']),  # Récupère juste le nom du fichier
+            'url': request.build_absolute_uri(default_storage.url(report['file'])),  # URL complète
+            'date_added': report['date_added'].strftime('%Y-%m-%d') if report['date_added'] else "Date inconnue"
+        }
+        for report in reports
+    ]
+    return JsonResponse({'reports': data})

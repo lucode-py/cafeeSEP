@@ -1,43 +1,86 @@
-.glassmorph-container {
+.glassmorph-container-rdv {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(25000px); /* Flou arrière-plan */
-    -webkit-backdrop-filter: blur(25000px); /* Compatibilité Safari */
-    border-radius: 15px; /* Coins arrondis */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure transparente */
+    backdrop-filter: blur(25000px); /* Flou-arrière-plan */ 
+    -webkit-backdrop-filter: blur (25000px); /* Compatibilité Safari */ 
+    border-radius: 15px; /* Coins arrondis */ 
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure transparente */ 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre légère */
     color: white; /* Texte blanc */
-    margin: auto; /* Centre le composant */
+    margin: auto; /* Centre le composant */ 
     text-align: left;
-    width: 90%; /* S'adapte aux petits écrans */
+    max-width: 1200px; /* Largeur maximale /* padding: 2rem; /* Évite que le contenu colle aux bords */
     padding: 2rem; /* Évite que le contenu colle aux bords */
+}
 
+.rendez-vous-container img {
+    width: 100%;
+    object-fit: contain;
+}
+
+@media (min-width: 985px) {
+    .rendez-vous-container {
+        display: flex;
+        flex-direction: row; /* Les. éléments sont alignés en ligne sur les grands é*/
+    }
+}
+
+@media (max-width: 984px) {
+    .rendez-vous-container { 
+        display: flex;
+        flex-direction: column-reverse; /* Les éléments sont alignés en colonne sur les petits écrans */
+        align-items: center; /* Centre les éléments horizontalement */
+    }
+}
+
+.contact-buttons {
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
- 
   
-.rendezvous-container {
-display: flex;
-flex-direction: column-reverse;
-align-items: center;
-}
-
-@media (min-width: 768px) {
-.rendezvous-container {
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.rendezvous-text {
-    flex: 1;
-    padding-right: 20px;
-}
-
-.rendezvous-img {
-    flex: 1;
-    text-align: right;
-}
-
-.rendezvous-img img {
-    max-width: 100%;
-    height: auto;
-}
-}
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Style spécifique pour chaque bouton */
+  .phone-btn {
+    background: #28a745; /* Vert pour l'appel */
+  }
+  
+  .phone-btn:hover {
+    background: #218838;
+  }
+  
+  .email-btn {
+    background: #007bff; /* Bleu pour l'email */
+  }
+  
+  .email-btn:hover {
+    background: #0056b3;
+  }
+  
+  /* Ajustement pour mobile */
+  @media (max-width: 985px) {
+    .contact-buttons {
+      position: static;
+      text-align: center;
+      margin-top: 20px;
+    }
+  
+    .contact-btn {
+      width: 90%;
+    }
+  }
