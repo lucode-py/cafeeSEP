@@ -41,10 +41,6 @@ DATABASES = {
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 
-# Répertoire où Django cherchera les fichiers statiques
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'main', 'static'),  # Ajoute ici le chemin vers ton dossier static
-]
 
 
 LOGIN_REDIRECT_URL = '/edit'  # Rediriger vers /edit après connexion
@@ -62,21 +58,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'corsheaders',
-    "django_vite",
 ]
 
 
-print("DEBUG VITE", type(DEBUG))  # pour voir si DEBUG est bien bool
 
-
-DJANGO_VITE = {
-    "default": {
-        "dev_mode": DEBUG,
-        "dev_server_port": 5173,
-        "dev_server_host": "localhost",
-        "static_url_prefix": "frontend"
-    }
-}
 
 
 """print("DJANGO_VITE is", type(DJANGO_VITE), DJANGO_VITE)"""
@@ -168,5 +153,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+"""
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True"""
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+}
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+<!--<head>
     <meta charset="UTF-8">
     <title>Mon site Django + React</title>
     <script type="module" src="http://localhost:5173/@vite/client"></script>
@@ -9,18 +9,21 @@
 <body>
     <div id="root"></div>
 </body>
-</html>
+</html>-->
 
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     {% load static %}
+    {% load vite_tags %}
     <title>Café SEP - Acceuil</title>
-  <script type="module" crossorigin src="{% static '/assets/index-cBaZ7F5i.js' %}"></script>
-  <link rel="stylesheet" crossorigin href="{% static '/assets/index-B5B-SW8W.css' %}">
+    <link rel="stylesheet" href="{% vite_asset 'src/main.jsx' 'css' %}">
+    <script type="module" src="{% vite_asset 'src/main.jsx' 'js' %}"></script>
+  <!--<script type="module" crossorigin src="{% static '/assets/main-idvdqKH7.js' %}"></script>
+  <link rel="stylesheet" crossorigin href="{% static '/assets/main-D3lzGfUS.css' %}">-->
 </head>
 <body>
     <div id="root"></div>
 </body>
-</html>-->
+</html>

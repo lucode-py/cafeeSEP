@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Lenis from "@studio-freight/lenis"; // Importer Lenis
 import Header from "./components/Header";
 import About from "./components/About";
 import Carousel from "./components/Carousel";
@@ -37,29 +36,7 @@ const App = () => {
   const [scrollIndex, setScrollIndex] = useState(0);
   const background = useSmoothBackground(); // 💡 Correctement utilisé ici 
 
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.5, // Durée du scroll (plus c'est élevé, plus c'est doux)
-      easing: t => t * (2 - t), // équivalent à "easeOutQuad"
-      gestureOrientation: "vertical", // pour s'assurer qu'on scroll bien verticalement
-      wheelMultiplier: 0.3, // réduit la sensibilité au scroll avec la molette / trackpad
-      normalizeWheel: true,
-      smooth: true,
-      smoothTouch: false // smooth activé aussi pour le tactile
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy(); // clean-up
-    };
-
-  }, []);
+  
   
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/textes/")
