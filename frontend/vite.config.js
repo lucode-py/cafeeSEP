@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: process.env.NODE_ENV === 'production' ? '/static/' : '/', // Base URL pour les fichiers générés
   build: {
-    outDir: resolve(__dirname, '../staticfiles'), // Dossier de sortie pour les fichiers générés
+    outDir: resolve(__dirname, '../static'), // Dossier de sortie pour les fichiers générés
     emptyOutDir: true, // Vide le dossier de sortie avant chaque build
     manifest: true, // <- ajoute ça ici
     rollupOptions: {

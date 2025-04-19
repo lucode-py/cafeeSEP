@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./media:/app/media
+      - ./media:/app/media:z
     environment:
       - DJANGO_SETTINGS_MODULE=projectCafeeSEP.settings
     restart: unless-stopped

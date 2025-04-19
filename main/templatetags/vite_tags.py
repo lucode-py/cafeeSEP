@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.simple_tag
 def vite_asset(entrypoint, asset_type="js"):
-    manifest_path = Path(settings.BASE_DIR) / 'staticfiles' / '.vite' / 'manifest.json'
+    manifest_path = Path(settings.BASE_DIR) / 'static' / '.vite' / 'manifest.json'
 
     if not manifest_path.exists():
         return ''

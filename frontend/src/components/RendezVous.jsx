@@ -1,5 +1,5 @@
 import React from "react";
-const agendaImg = "http://127.0.0.1:8000/static/home_images/agenda.png";
+const agendaImg = "http://192.168.1.74:8000/static/home_images/agenda.png";
 import "./css/RendezVous.css";
 
 const RendezVous = ({ textes }) => {

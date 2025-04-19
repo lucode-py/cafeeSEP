@@ -18,14 +18,14 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copier les fichiers
-COPY --from=frontend-builder /app/frontend/dist /app/staticfiles
+#COPY --from=frontend-builder /app/staticfiles /app/static
 COPY . /app
 
 # Installer les dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Collecter les fichiers statiques
-RUN python manage.py collectstatic --noinput
+#RUN python manage.py collectstatic --noinput
 
 # Exposer le port
 EXPOSE 8000

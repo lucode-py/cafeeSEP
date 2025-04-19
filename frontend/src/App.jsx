@@ -39,14 +39,14 @@ const App = () => {
   
   
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/textes/")
+    fetch("/api/textes/")
       .then((res) => res.json())
       .then((data) => setTextes(data))
       .catch((error) => console.error("Erreur de chargement des textes:", error));
   }, []);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/activites/")
+    fetch("/api/activites/")
       .then((res) => res.json())
       .then((data) => {
         console.log("Activités chargées :", data);
