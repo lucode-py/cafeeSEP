@@ -22,6 +22,9 @@
         display: flex;
         flex-direction: row; /* Les. éléments sont alignés en ligne sur les grands é*/
     }
+    .phone-btn {
+      display: none !important; /* Masque le bouton d'appel sur les petits écrans */
+    }
 }
 
 @media (max-width: 984px) {

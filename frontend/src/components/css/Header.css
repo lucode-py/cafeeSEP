@@ -35,19 +35,19 @@
   
   max-width: 800px; /* Limite la largeur maximale */
   white-space: nowrap; /* Empêche le texte de passer à la ligne */
-  overflow: hidden; /* Cache le débordement si nécessaire */
+  /*overflow: hidden; /* Cache le débordement si nécessaire */
   text-overflow: ellipsis; /* Ajoute des points de suspension si le texte dépasse */
 }
 
-@media (max-width: 985px) {
+/*@media (max-width: 985px) {
   .scroll-down {
     bottom: 10px; /* Réduit la distance par rapport au bas */
-    width: 30px; /* Réduit la taille de la flèche */
-    height: 30px;
-  }
+    /*width: 30px; /* Réduit la taille de la flèche */
+    /*height: 30px;
+  /*}
 
   .title-container {
     width: 90%; /* Réduit la largeur sur les petits écrans */
-    max-width: none; /* Supprime la limite de largeur maximale */
-  }
-}
+    /*max-width: none; /* Supprime la limite de largeur maximale */
+  /*}
+}*/
