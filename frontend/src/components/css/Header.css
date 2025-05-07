@@ -44,9 +44,9 @@
     bottom: 10px; /* Réduit la distance par rapport au bas */
     /*width: 30px; /* Réduit la taille de la flèche */
     /*height: 30px;
-  /*}
+  }*/
 
-  .title-container {
+  /*.title-container {
     width: 90%; /* Réduit la largeur sur les petits écrans */
     /*max-width: none; /* Supprime la limite de largeur maximale */
   /*}
