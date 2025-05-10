@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'corsheaders',
+    'axes',
 ]
 
 
@@ -76,6 +77,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'projectCafeeSEP.urls'
@@ -84,6 +86,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +125,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+# Verifictation des tentatives de connexion
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+# Configuration de django-axes
+AXES_FAILURE_LIMIT = 5  # Nombre de tentatives avant blocage
+AXES_COOLOFF_TIME = 1  # Délai de déblocage (en heures ou timedelta)
+AXES_LOCKOUT_TEMPLATE = 'locked_out.html'  # Facultatif
+#AXES_ONLY_USER_FAILURES = True  Bloque par utilisateur
 
 
 # Internationalization
