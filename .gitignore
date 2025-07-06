@@ -30,3 +30,4 @@ dist/
 # Fichiers système
 .DS_Store
 Thumbs.dbcafesepproject.oci
+db.sqlite3
