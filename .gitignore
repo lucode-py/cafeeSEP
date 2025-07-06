@@ -1,1 +1,32 @@
+# Fichiers sensibles
 .env
+
+# Base de données locale
+db.sqlite3
+
+# Fichiers médias (uploads)
+media/
+
+# Fichiers Python compilés
+*.pyc
+__pycache__/
+
+# Répertoires de virtualenv
+venv/
+.env/
+
+# Fichiers générés par Django
+*.log
+
+# Node.js (frontend)
+node_modules/
+dist/
+
+# Fichiers spécifiques à l'IDE
+.vscode/
+.idea/
+*.swp
+
+# Fichiers système
+.DS_Store
+Thumbs.db

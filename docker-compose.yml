@@ -1,0 +1,10 @@
+services:
+  cafesepproject:
+    build: .
+    container_name: cafesepproject
+    ports:
+      - "8001:8000"
+      
+    environment:
+      - DJANGO_SETTINGS_MODULE=projectCafeeSEP.settings
+    restart: unless-stopped

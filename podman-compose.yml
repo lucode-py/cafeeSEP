@@ -5,7 +5,7 @@ services:
     build: .
     container_name: cafesepproject
     ports:
-      - "8000:8000"
+      - "8001:8000"
     volumes:
       - ./db.sqlite3:/app/db.sqlite3:z
       - ./media:/app/media:z
