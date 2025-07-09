@@ -12,8 +12,10 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', include('main.urls')),
 ]
-
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve static and media files only in development
+if settings.DEBUG:
+    # Static files (CSS, JavaScript, Images)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # Media files (uploads)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
