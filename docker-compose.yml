@@ -7,4 +7,4 @@ services:
       
     environment:
       - DJANGO_SETTINGS_MODULE=projectCafeeSEP.settings
-    restart: unless-stopped
+    restart: always
