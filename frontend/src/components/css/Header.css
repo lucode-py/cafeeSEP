@@ -30,15 +30,50 @@
   top: 50%; /* Centre verticalement */
   left: 50%; /* Centre horizontalement */
   transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
-  text-align: center; /* Centre le texte */
+  text-align: left; /* mettre le texte a gauche */
   z-index: 10; /* Assurez-vous que le titre est au-dessus des autres éléments */
-  
   max-width: 800px; /* Limite la largeur maximale */
   white-space: nowrap; /* Empêche le texte de passer à la ligne */
   /*overflow: hidden; /* Cache le débordement si nécessaire */
   text-overflow: ellipsis; /* Ajoute des points de suspension si le texte dépasse */
 }
+.content-button {
+  display: flex;
+  z-index: 10; /* Assurez-vous que le bouton est au-dessus des autres éléments */
+}
+.btn-primary span{
+  font-size: 0.7em; /* Taille de police pour le titre principal */
+  color: #D2FFDB; /* Couleur du texte */
+  margin-bottom: 0px; /* Espace entre le titre principal et le sous-titre */
+  margin-left: 0.5em;
+  padding: 0px;
+}
 
+.btn-primary {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(25000px);
+  -webkit-backdrop-filter: blur(25000px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 2px;
+  text-decoration: none;
+}
+
+.tel-btn {
+  display: flex;
+  z-index: 10; /* Assurez-vous que le bouton est au-dessus des autres éléments */
+  padding: 5px 10px;
+  border-radius: 15px;
+  
+}
+
+.mail-btn {
+  display: flex;
+  z-index: 10; /* Assurez-vous que le bouton est au-dessus des autres éléments */
+  padding: 5px 10px;
+  border-radius: 15px;
+}
 /*@media (max-width: 985px) {
   .scroll-down {
     bottom: 10px; /* Réduit la distance par rapport au bas */

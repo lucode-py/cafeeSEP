@@ -30,7 +30,7 @@
                          <div>
                              <!-- Zone de texte éditable -->
                              <h2 class="fw-semibold">À propos de nous</h2>
-                             <textarea name="contenu" class="form-control">{{ texte.contenu }}</textarea>
+                             <textarea name="contenu" class="form-control">{{ texte.contenu }}</textarea>  
                          </div>
                          <!-- Bouton de soumission -->
                          <button type="submit" class="btn btn-primary mt-3">Sauvegarder</button>
@@ -162,7 +162,7 @@
                         {% for texte in textes %}
                             {% if texte.section == "Rendez-vous" %}
                                 <div class="d-flex align-items-center mb-3">
-                                    <input type="text" name="dates[]" value="{{ texte.contenu }}" class="form-control me-2">
+                                    <input type="date" name="dates[]" value="{{ texte.contenu }}" class="form-control me-2">
                                     <button type="button" class="btn btn-danger btn-sm remove-date">Supprimer</button>
                                 </div>
                             {% endif %}
@@ -191,7 +191,7 @@
                 const newDateField = document.createElement('div');
                 newDateField.classList.add('d-flex', 'align-items-center', 'mb-3');
                 newDateField.innerHTML = `
-                    <input type="text" name="dates[]" value="" class="form-control me-2">
+                    <input type="date" name="dates[]" value="" class="form-control me-2">
                     <button type="button" class="btn btn-danger btn-sm remove-date">Supprimer</button>
                 `;
                 container.appendChild(newDateField);

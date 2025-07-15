@@ -7,7 +7,7 @@ const ReportsSidebar = () => {
 
   // Charger les rapports depuis l'API
   useEffect(() => {
-    fetch('/api/list_reports/')
+    fetch('https://cafesep91.fr/api/list_reports/')
       .then(response => {
         if (!response.ok) {
           throw new Error(`Erreur HTTP: ${response.status}`);

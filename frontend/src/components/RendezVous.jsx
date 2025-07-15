@@ -1,5 +1,5 @@
 import React from "react";
-const agendaImg = "http://192.168.1.74:8000/static/home_images/agenda.png";
+const agendaImg = "https://cafesep91.fr/media/agenda.png";
 import "./css/RendezVous.css";
 
 const RendezVous = ({ textes }) => {
@@ -40,7 +40,8 @@ const RendezVous = ({ textes }) => {
         </div>
         {/* Image à droite sur grand écran, en bas sur mobile */}
         <div className="col-md-6 text-center">
-          <img src={agendaImg} alt="Agenda" className="img-fluid" width="700" />
+          <img src={agendaImg} alt="Agenda" className="img-fluid" width="100" />
+          
         </div>
       </div>
     </div>
