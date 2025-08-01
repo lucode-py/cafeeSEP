@@ -10,7 +10,7 @@ const Header = () => {
         
           <div className="content  text-center text-white">
           
-            <svg width="321" height="98" viewBox="0 0 321 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="logo-svg" width="100%" height="100%" viewBox="0 0 321 98" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M297.75 28H301.625C305.736 28 309.678 29.475 312.585 32.1005C315.492 34.726 317.125 38.287 317.125 
                   42C317.125 45.713 315.492 49.274 312.585 51.8995C309.678 54.525 305.736 56 301.625 56H297.75M297.75 28L235.75 
                   28V59.5C235.75 63.213 237.383 66.774 240.29 69.3995C243.197 72.025 247.139 73.5 251.25 73.5H282.25C286.361 73.5 

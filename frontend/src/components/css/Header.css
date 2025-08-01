@@ -41,15 +41,10 @@
   display: flex;
   z-index: 10; /* Assurez-vous que le bouton est au-dessus des autres éléments */
 }
-.btn-primary span{
-  font-size: 0.7em; /* Taille de police pour le titre principal */
-  color: #D2FFDB; /* Couleur du texte */
-  margin-bottom: 0px; /* Espace entre le titre principal et le sous-titre */
-  margin-left: 0.5em;
-  padding: 0px;
-}
-
 .btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.5em; /* Espace entre l’icône et le texte */
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(25000px);
   -webkit-backdrop-filter: blur(25000px);
@@ -58,6 +53,20 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   margin: 2px;
   text-decoration: none;
+  padding: 5px 12px;
+}
+
+.btn-primary svg {
+  display: block;
+  margin: 0;
+  padding: 10px;
+}
+
+.btn-primary span{
+  font-size: 0.95em; /* Taille de police pour le titre principal */
+  color: #D2FFDB; /* Couleur du texte */
+  margin: 0;
+  padding: 0;
 }
 
 .tel-btn {
@@ -74,6 +83,22 @@
   padding: 5px 10px;
   border-radius: 15px;
 }
+
+.logo-svg {
+  width: 100%; /* Ajuste cette valeur pour qu’elle corresponde à la largeur des boutons */
+  max-width: 100%;
+  display: block;
+  margin: 0 auto 16px auto; /* Centré et espace en bas */
+}
+
+@media (max-width: 985px) {
+  .logo-svg {
+     width: 90vw; /*Prend presque toute la largeur sur mobile */
+    min-width: 220px;
+  }
+
+}
+
 /*@media (max-width: 985px) {
   .scroll-down {
     bottom: 10px; /* Réduit la distance par rapport au bas */
