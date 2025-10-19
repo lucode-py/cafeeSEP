@@ -32,7 +32,7 @@ const RendezVous = ({ textes }) => {
               </a>
 
               {/* Bouton pour envoyer un email à Fabienne */}
-              <a href="mailto:fabimics3@gmail.com" className="contact-btn email-btn">
+              <a href="mailto:fabimic3@gmail.com" className="contact-btn email-btn">
                 📧 Contacter Fabienne
               </a>
             </div>
