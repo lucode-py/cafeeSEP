@@ -12,6 +12,7 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
+    nginx \
     && rm -rf /var/lib/apt/lists/*
 
 # Créer le dossier de l'app
@@ -21,6 +22,8 @@ WORKDIR /app
 #COPY --from=frontend-builder /app/staticfiles /app/static
 COPY . /app
 
+COPY ./nginx.conf /etc/nginx/conf.d
+
 # Installer les dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -28,7 +31,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN python manage.py collectstatic --noinput
 
 # Exposer le port
-EXPOSE 8000
+EXPOSE 9000
 
 # Lancer l'application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "projectCafeeSEP.wsgi:application"]
+CMD ["nginx"]
+CMD ["gunicorn", "--bind", "0.0.0.0:9000", "projectCafeeSEP.wsgi:application"]

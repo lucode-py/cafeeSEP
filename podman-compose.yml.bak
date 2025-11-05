@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  cafesepproject:
+    build: .
+    container_name: cafesepproject
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3:z
+      - ./media:/app/media:z
+      - ./static:/app/static:z
+    environment:
+      - DJANGO_SETTINGS_MODULE=projectCafeeSEP.settings
+    restart: always

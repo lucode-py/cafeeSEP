@@ -5,11 +5,7 @@ services:
     build: .
     container_name: cafesepproject
     ports:
-      - "8001:8000"
-    volumes:
-      - ./db.sqlite3:/app/db.sqlite3:z
-      - ./media:/app/media:z
-      - ./static:/app/static:z
+      - "8001:80"
     environment:
       - DJANGO_SETTINGS_MODULE=projectCafeeSEP.settings
     restart: always

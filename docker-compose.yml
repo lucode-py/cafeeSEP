@@ -3,7 +3,7 @@ services:
     build: .
     container_name: cafesepproject
     ports:
-      - "8001:8000"
+      - "8001:80"
       
     environment:
       - DJANGO_SETTINGS_MODULE=projectCafeeSEP.settings
