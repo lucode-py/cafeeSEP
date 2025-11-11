@@ -1,29 +1,36 @@
 @media (min-width: 985px) {
   .glassmorph-container-slide {
     position: relative;
-    height: 70vh; /* Ajuste la hauteur du conteneur */
-    text-align: right;
+    height: 70vh;
+    text-align: left;
     overflow: hidden;
+    padding-right: 40%;
   }
-
   .glassmorph-container-slide img {
     display: block;
-    width: 60%;
+    width: 35%;
     position: absolute;
     top: 50%;
-    right: 0; /* Aligne à droite */
-    transform: translateY(-50%); /* Centre verticalement */
+    right: 5%;
+    transform: translateY(-50%);
     object-fit: contain;
+  }
+  .glassmorph-container-slide h3 {
+    margin-bottom: 1rem;
+  }
+  .glassmorph-container-slide p {
+    max-width: 60%;
+    word-wrap: break-word;
   }
 }
 
 /* Personnalisation des boutons de navigation */
 .swiper-button-next,
 .swiper-button-prev {
-  color: white; /* Change la couleur des flèches */
-  background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
-  border-radius: 50%; /* Rendre les boutons ronds */
-  width: 50px; /* Taille personnalisée */
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
@@ -31,15 +38,125 @@
   transition: background 0.3s ease-in-out;
 }
 
-/* Changement de style au survol */
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
   background: rgba(255, 255, 255, 0.4);
 }
 
-/* Ajustement de l'icône des flèches */
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  font-size: 20px; /* Taille des icônes */
+  font-size: 20px;
   font-weight: bold;
+}
+
+/* Custom controls: flèches de chaque côté des points */
+.carousel-controls {
+  display: flex;
+  flex-direction: row; /* CHANGÉ: row au lieu de column */
+  align-items: center;
+  justify-content: center;
+  gap: 16px; /* Espace entre flèche-gauche, points, flèche-droite */
+  margin-top: 16px;
+  padding: 0 20px; /* Un peu de padding sur les côtés */
+}
+
+/* Conteneur des points */
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-arrow {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+  flex-shrink: 0; /* Empêche les flèches de se compresser */
+}
+
+.carousel-arrow:hover:not(.disabled) {
+  transform: scale(1.06);
+}
+
+.carousel-arrow.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.45);
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+  flex-shrink: 0; /* Empêche les points de se compresser */
+}
+
+.carousel-dot.active {
+  background: #ffffff;
+  transform: scale(1.12);
+}
+
+/* Responsive tweaks */
+@media (max-width: 985px) {
+  .carousel-controls {
+    gap: 12px;
+    margin-top: 12px;
+    padding: 0 10px;
+  }
+  
+  .carousel-dots {
+    gap: 6px;
+  }
+  
+  .carousel-arrow {
+    font-size: 24px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+  .carousel-controls {
+    gap: 8px;
+    padding: 0 5px;
+  }
+  
+  .carousel-arrow {
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Ensure the slide content remains centered */
+.glassmorph-container .mySwiper,
+.glassmorph-container .swiper {
+  display: flex;
+  justify-content: center;
 }
