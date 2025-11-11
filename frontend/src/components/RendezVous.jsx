@@ -5,7 +5,37 @@ import "./css/RendezVous.css";
 const RendezVous = ({ textes }) => {
   console.log("textes:", textes); // 🔍 Vérifier la valeur de text
 
-  const rendezVous = textes.filter((t) => t.section === "Rendez-vous");
+  // Filtrer et trier les textes de la section "Rendez-vous" par date (du plus récent au moins récent)
+  const sortedRendezVous = React.useMemo(() => {
+    if (!Array.isArray(textes)) return [];
+    const items = textes
+      .filter((t) => t.section === "Rendez-vous")
+      .map((t) => ({ ...t, _ts: t.contenu ? Date.parse(t.contenu) : NaN }));
+
+    items.sort((a, b) => {
+      const ta = a._ts;
+      const tb = b._ts;
+      if (!Number.isNaN(ta) && !Number.isNaN(tb)) return tb - ta; // dates valides -> décroissant
+      if (!Number.isNaN(tb)) return 1 * -1; // b valide -> b avant a
+      if (!Number.isNaN(ta)) return -1 * -1; // a valide -> a avant b
+      return 0; // sinon garder l'ordre
+    });
+
+    return items;
+  }, [textes]);
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+    const ts = Date.parse(dateStr);
+    if (Number.isNaN(ts)) return dateStr;
+    const d = new Date(ts);
+    return d.toLocaleDateString("fr-FR", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   return (
     <div className="glassmorph-container-rdv">
@@ -19,9 +49,9 @@ const RendezVous = ({ textes }) => {
               Voici les créneaux disponibles :
             </p>
             <ul className="p-3">
-              {rendezVous.map((texte, index) => (
-                <li key={index} className="mt-2">
-                  {texte.contenu}
+              {sortedRendezVous.map((texte, index) => (
+                <li key={texte.id ?? texte.pk ?? index} className="mt-2">
+                  {formatDate(texte.contenu)}
                 </li>
               ))}
             </ul>

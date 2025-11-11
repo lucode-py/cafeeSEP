@@ -30,6 +30,19 @@ const ReportsSidebar = () => {
       .catch(error => console.error('Erreur de chargement des rapports:', error));
   }, []);
 
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+    const ts = Date.parse(dateStr);
+    if (isNaN(ts)) return dateStr;
+    const d = new Date(ts);
+    return d.toLocaleDateString("fr-FR", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   // Sélectionner un compte-rendu
   const handleReportClick = (report) => {
     setSelectedReport(report);
@@ -43,7 +56,7 @@ const ReportsSidebar = () => {
           {reports.length > 0 ? (
             reports.map((report, index) => (
               <li key={report.id || index} onClick={() => handleReportClick(report)}>
-                {report.date_added || "Date inconnue"}
+                {formatDate(report.date_added || report.date || report.title) || "Date inconnue"}
               </li>
             ))
           ) : (
